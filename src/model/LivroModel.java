@@ -15,6 +15,11 @@ public class LivroModel {
     private int quantidade;
     private int isbn;
 
+    /*
+    tema
+    data_publi
+     */
+
 
     public LivroModel(long idLivro, String titulo, String autor, int quantidade, int isbn) {
         this.idLivro = idLivro;

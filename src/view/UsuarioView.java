@@ -12,3 +12,12 @@ public class UsuarioView {
         return usuario;
     }
 }
+
+/*
+tela principal-
+cadastro de usuario
+editar usuario
+deletar usuario
+
+ */
+

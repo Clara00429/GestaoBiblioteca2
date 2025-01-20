@@ -14,6 +14,10 @@ public class UsuarioModel
     private String nome;
     private String email;
     private int idUsuario;
+    /*
+    sexo
+    num_celular
+     */
 
     public UsuarioModel(){}
 
