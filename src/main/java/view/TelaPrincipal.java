@@ -42,6 +42,7 @@ public class TelaPrincipal extends JFrame {
                   //String texto = .getText();
                   //JOptionPane.showMessageDialog(null,texto);
                 new Livro();
+                new Usuario();
             }
         });
     }

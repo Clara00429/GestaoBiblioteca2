@@ -14,6 +14,8 @@ public class Usuario extends JFrame{
     private JRadioButton masculinoRadioButton;
     private JButton ENVIAR;
     private JPanel cadastro;
+    private JRadioButton radioButton1;
+    private JRadioButton radioButton2;
 
 
     public Usuario() {
