@@ -16,8 +16,9 @@ public class Main {
         UsuarioController usuarioController = new UsuarioController();
         usuarioController.iniciaApUsuario();
         */
-    new TelaPrincipal();
-    //    new Livro();
+ new TelaPrincipal();
+//    new Livro();
+    //new Usuario();
     }
 
 }

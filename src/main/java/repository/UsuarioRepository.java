@@ -5,6 +5,7 @@ import model.UsuarioModel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.SQLException;
 
 public class UsuarioRepository {
     private static UsuarioRepository instance;
@@ -29,7 +30,15 @@ public class UsuarioRepository {
         return instance;
     }
 
-    public String salvarUsuario(UsuarioModel usuario){
-        return "Usuario salvo com sucesso!";
+    public String salvar(UsuarioModel usuario) throws SQLException {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(usuario);
+            entityManager.getTransaction().commit();
+
+            return "Usuario salvo com sucesso!";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

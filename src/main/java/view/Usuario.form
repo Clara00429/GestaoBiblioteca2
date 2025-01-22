@@ -95,23 +95,23 @@
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <text value="Sexo:"/>
         </properties>
       </component>
-      <component id="16659" class="javax.swing.JRadioButton" binding="radioButton1" default-binding="true">
+      <component id="16659" class="javax.swing.JRadioButton" binding="femininoRadioButton" default-binding="true">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="RadioButton"/>
+          <text value="Feminino"/>
         </properties>
       </component>
-      <component id="84a51" class="javax.swing.JRadioButton" binding="radioButton2" default-binding="true">
+      <component id="84a51" class="javax.swing.JRadioButton" binding="masculinoRadioButton" default-binding="true">
         <constraints>
           <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="RadioButton"/>
+          <text value="Masculino"/>
         </properties>
       </component>
       <hspacer id="8ad67">

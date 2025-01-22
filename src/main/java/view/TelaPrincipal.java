@@ -36,13 +36,16 @@ public class TelaPrincipal extends JFrame {
         opcoes.add(listar);
         barraMenu.add(cadastro);
         barraMenu.add(opcoes);
-        cadastro.addActionListener(new ActionListener() {
+        cadUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                  //String texto = .getText();
-                  //JOptionPane.showMessageDialog(null,texto);
-                new Livro();
                 new Usuario();
+            }
+        });
+        cadLivro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Livro();
             }
         });
     }

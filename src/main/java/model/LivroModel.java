@@ -19,7 +19,6 @@ public class LivroModel {
     private Date dataPublicacao;
 
     public LivroModel(Date dataPublicacao) {
-
     }
 
     public LivroModel(long idLivro,Date dataPublicacao, String tema, String titulo, String autor, int quantidade, int isbn) {
@@ -36,56 +35,55 @@ public class LivroModel {
     public long getIdLivro() {
         return idLivro;
     }
-
     public void setIdLivro(long idLivro) {
         this.idLivro = idLivro;
     }
 
+
     public String getTitulo() {
         return titulo;
     }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
 
     public String getAutor()
     {
         return autor;
     }
-
     public void setAutor(String autor) {
         this.autor = autor;
     }
 
+
     public int getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
+
     public int getIsbn() {
         return isbn;
     }
-
     public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
+
     public String getTema() {
         return tema;
     }
-
     public void setTema(String tema) {
         this.tema = tema;
     }
 
+
     public Date getDataPublicacao() {
         return dataPublicacao;
     }
-
     public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }

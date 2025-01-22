@@ -4,17 +4,19 @@ import model.UsuarioModel;
 import repository.UsuarioRepository;
 import view.MenuPrincipalView;
 
+import java.sql.SQLException;
+
 public class UsuarioController {
     UsuarioRepository usuarioR = new UsuarioRepository();
 
-    public void iniciaApUsuario(){
+ /*   public void iniciaApUsuario(){
         UsuarioModel usuario = new UsuarioModel();
 
         MenuPrincipalView usuarioM = new MenuPrincipalView();
         usuarioM.menuPrincipal();
-    }
-    public String salvarUsuario(UsuarioModel usuario){
-        String retornoRepositoryUsuario = usuarioR.salvarUsuario(usuario);
+    }*/
+    public String salvar(UsuarioModel usuario) throws SQLException {
+        String retornoRepositoryUsuario = usuarioR.salvar(usuario);
         return retornoRepositoryUsuario;
     }
 }
