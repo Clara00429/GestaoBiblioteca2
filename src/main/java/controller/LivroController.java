@@ -2,7 +2,7 @@ package controller;
 
 import model.LivroModel;
 import repository.LivroRepository;
-import view.MenuPrincipalView;
+import view.TelaPrincipal;
 
 public class LivroController {
     LivroRepository livroR = new LivroRepository();
@@ -10,8 +10,8 @@ public class LivroController {
     public void iniciaApLivro(){
         LivroModel livroM = new LivroModel();
 
-        MenuPrincipalView livro = new MenuPrincipalView();
-        livro.menuPrincipal();
+        TelaPrincipal livro = new TelaPrincipal();
+        livro.criarMenu();
     }
 
     public String salvar(LivroModel livro){
