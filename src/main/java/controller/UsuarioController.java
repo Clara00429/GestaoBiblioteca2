@@ -5,6 +5,7 @@ import repository.UsuarioRepository;
 import view.TelaPrincipal;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UsuarioController {
     UsuarioRepository usuarioR = new UsuarioRepository();
@@ -19,4 +20,10 @@ public class UsuarioController {
         String retornoRepositoryUsuario = usuarioR.salvar(usuario);
         return retornoRepositoryUsuario;
     }
+
+    public List<UsuarioModel> buscarUsuario () throws SQLException {
+        return UsuarioRepository.buscarUsuario();
+    }
+
+
 }

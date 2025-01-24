@@ -25,7 +25,7 @@ public class Usuario extends JFrame{
         this.setTitle("Cadastro de Usuário");
         this.setContentPane(cadastro);
         this.setSize(640, 480);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
 
         ENVIAR.addActionListener(new ActionListener() {

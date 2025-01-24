@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UsuarioRepository {
     private static UsuarioRepository instance;
@@ -15,6 +16,9 @@ public class UsuarioRepository {
         entityManager = getEntityManager();
     }
 
+    public static List<UsuarioModel> buscarUsuario() {
+        return List.of();
+    }
     private EntityManager getEntityManager() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("crudHibernatePU");
         if (entityManager == null) {
