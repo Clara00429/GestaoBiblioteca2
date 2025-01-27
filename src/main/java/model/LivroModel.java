@@ -3,6 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,12 +17,12 @@ public class LivroModel {
     private int quantidade;
     private int isbn;
     private String tema;
-    private Date dataPublicacao;
+    private LocalDate dataPublicacao;
 
     public LivroModel(Date dataPublicacao) {
     }
 
-    public LivroModel(long idLivro,Date dataPublicacao, String tema, String titulo, String autor, int quantidade, int isbn) {
+    public LivroModel(long idLivro,LocalDate dataPublicacao, String tema, String titulo, String autor, int quantidade, int isbn) {
         this.idLivro = idLivro;
         this.titulo = titulo;
         this.autor = autor;
@@ -81,10 +82,10 @@ public class LivroModel {
     }
 
 
-    public Date getDataPublicacao() {
+    public LocalDate getDataPublicacao() {
         return dataPublicacao;
     }
-    public void setDataPublicacao(Date dataPublicacao) {
+    public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 }
