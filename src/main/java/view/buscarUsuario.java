@@ -2,7 +2,6 @@ package view;
 
 import model.UsuarioModel;
 import repository.UsuarioRepository;
-
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -13,6 +12,7 @@ public class buscarUsuario extends JFrame {
     private JTextField pesquisar;
     private JButton buscarButton;
     private JTable tabela;
+    private JButton removerbutton;
 
     public List<UsuarioModel> buscarTodos() {
         try {
@@ -35,9 +35,9 @@ public class buscarUsuario extends JFrame {
         this.setVisible(true);
     }
 
-    private static class UsuarioTabela extends AbstractTableModel{
+    private class UsuarioTabela extends AbstractTableModel{
         private UsuarioRepository usuarioRepository = new UsuarioRepository();
-        private final String[] COLUMNS = new String[] {"Id", "Nome", "Idade", "Turma"};
+        private final String[] COLUMNS = new String[] {"Id", "Nome", "E-mail", "Celular", "Sexo"};
         private List<UsuarioModel> listaU = UsuarioRepository.buscarUsuario();
 
         @Override
@@ -56,7 +56,7 @@ public class buscarUsuario extends JFrame {
                 case 1 -> listaU.get(rowIndex).getNome();
                 case 2 -> listaU.get(rowIndex).getEmail();
                 case 3 -> listaU.get(rowIndex).getNum_celular();
-
+                //fazer dps
                 case 4 -> listaU.get(rowIndex).getSexo();
                 default -> "-";
             };

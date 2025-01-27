@@ -44,6 +44,7 @@ public class TelaPrincipal extends JFrame {
 
         barraMenu.add(cadastro);
         barraMenu.add(opcoes);
+        barraMenu.add(opcoesU);
 
         cadUsuario.addActionListener(new ActionListener() {
             @Override
@@ -55,6 +56,16 @@ public class TelaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Livro();
+            }
+        });
+        buscarUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { new buscarUsuario();
+            }
+        });
+        removerUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { new removerUsuario();
             }
         });
     }

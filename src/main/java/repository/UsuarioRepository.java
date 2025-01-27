@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsuarioRepository {
     private static UsuarioRepository instance;
-    protected EntityManager entityManager;
+    protected static EntityManager entityManager;
 
     public UsuarioRepository() {
         entityManager = getEntityManager();
@@ -19,6 +19,7 @@ public class UsuarioRepository {
     public static List<UsuarioModel> buscarUsuario() {
         return List.of();
     }
+
     private EntityManager getEntityManager() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("crudHibernatePU");
         if (entityManager == null) {
@@ -44,5 +45,27 @@ public class UsuarioRepository {
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+
+    public static UsuarioModel buscarUsuario(Long id) throws SQLException {
+        UsuarioModel usuario = new UsuarioModel();
+        try {
+            usuario = entityManager.find(UsuarioModel.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    public String removerUsuario(UsuarioModel usuario)throws SQLException {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(usuario);
+            entityManager.getTransaction().commit();
+            return "Usuário removido com sucesso!";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
     }
 }
