@@ -1,5 +1,7 @@
 package view;
 
+import model.LivroModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,23 +27,10 @@ public class Livro extends JFrame {
         ENVIAR.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String texto = titulo.getText();
-                JOptionPane.showInputDialog(null, texto);
-
-                texto = autor.getText();
-                JOptionPane.showInputDialog(null, texto);
-
-                texto = isbn.getText();
-                JOptionPane.showInputDialog(null, texto);
-
-                texto = quantidade.getText();
-                JOptionPane.showInputDialog(null, texto);
-
-                texto = tema.getText();
-                JOptionPane.showInputDialog(null, texto);
-
-                texto = formattedData.getText();
-                JOptionPane.showInputDialog(null, texto);
+                LivroModel livro = new LivroModel();
+                livro.setTitulo(titulo.getText());
+                livro.setAutor(autor.getText());
+                livro.
             }
 
         });

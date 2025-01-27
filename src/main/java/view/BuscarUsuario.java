@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class buscarUsuario extends JFrame {
+public class BuscarUsuario extends JFrame {
     private JTextField pesquisar;
     private JButton buscarButton;
     private JTable tabela;
@@ -24,7 +24,7 @@ public class buscarUsuario extends JFrame {
         }
     }
 
-    public buscarUsuario() {
+    public BuscarUsuario() {
         this.setTitle("Buscar Usuários");
         UsuarioTabela usuarioTabela = new UsuarioTabela();
         tabela.setModel(usuarioTabela);

@@ -49,10 +49,10 @@ public class Usuario extends JFrame{
                 usuario.setNum_celular(celular.getText());
                 usuario.setSexo(sexo);
 
-                try{
-                    JOptionPane.showMessageDialog(null, usuarioC.salvar(usuario));
-                }catch (SQLException ex){
-                    throw new RuntimeException(ex);
+                try {
+                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso: " + usuarioC.salvar(usuario));
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar o usuário: " + ex.getMessage());
                 }
             }
         });
@@ -65,7 +65,7 @@ public class Usuario extends JFrame{
                     Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
                     try {
                         JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
-                        buscarUsuario buscarU = new buscarUsuario();
+                        BuscarUsuario buscarU = new BuscarUsuario();
                         tabela.setModel((TableModel) buscarU);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);

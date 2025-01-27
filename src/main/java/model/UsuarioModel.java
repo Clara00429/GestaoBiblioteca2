@@ -11,15 +11,15 @@ public class UsuarioModel
 {
     @Id
     @GeneratedValue
+    private long idUsuario;
     private String nome;
     private String email;
-    private int idUsuario;
     private String sexo;
     private String num_celular;
 
     public UsuarioModel(){}
 
-    public UsuarioModel(String sexo, String num_celular, String nome, String email, int idUsuario) {
+    public UsuarioModel(String sexo, String num_celular, String nome, String email, long idUsuario) {
         this.nome = nome;
         this.email = email;
         this.idUsuario = idUsuario;
@@ -34,7 +34,7 @@ public class UsuarioModel
         this.nome = nome;
     }
 
-    public int getIdUsuario() {
+    public long getIdUsuario() {
         return idUsuario;
     }
     public void setIdUsuario(int idUsuario) {

@@ -60,12 +60,14 @@ public class TelaPrincipal extends JFrame {
         });
         buscarUsuario.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { new buscarUsuario();
+            public void actionPerformed(ActionEvent e) {
+                new BuscarUsuario();
             }
         });
         removerUsuario.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { new removerUsuario();
+            public void actionPerformed(ActionEvent e) {
+                new removerUsuario();
             }
         });
     }
