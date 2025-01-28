@@ -13,8 +13,20 @@ public class buscarUsuario extends JFrame {
     private JButton buscarButton;
     private JTable tabela;
     private JButton removerbutton;
+    private JPanel painel;
 
-    public List<UsuarioModel> buscarTodos() {
+public buscarUsuario() {
+      this.setTitle("Buscar Usuários");
+      UsuarioTabela usuarioTabela = new UsuarioTabela();
+      tabela.setModel(usuarioTabela);
+      tabela.setAutoCreateRowSorter(true);
+      this.setContentPane(painel);
+      this.setSize(640, 480);
+      this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+      this.setVisible(true);
+    }
+
+    public List<UsuarioModel> buscarUsuario() {
         try {
             EntityManager entityManager = null;
             List<UsuarioModel> usuario = entityManager.createQuery("from UsuarioModel").getResultList();
@@ -22,17 +34,6 @@ public class buscarUsuario extends JFrame {
         } catch (Exception e) {
             return new ArrayList<>();
         }
-    }
-
-    public buscarUsuario() {
-        this.setTitle("Buscar Usuários");
-        UsuarioTabela usuarioTabela = new UsuarioTabela();
-        tabela.setModel(usuarioTabela);
-        tabela.setAutoCreateRowSorter(true);
-        this.setContentPane(pesquisar);
-        this.setSize(640, 480);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setVisible(true);
     }
 
     private class UsuarioTabela extends AbstractTableModel{
@@ -56,8 +57,7 @@ public class buscarUsuario extends JFrame {
                 case 1 -> listaU.get(rowIndex).getNome();
                 case 2 -> listaU.get(rowIndex).getEmail();
                 case 3 -> listaU.get(rowIndex).getNum_celular();
-                //fazer dps
-                case 4 -> listaU.get(rowIndex).getSexo();
+                case 4 -> listaU.get(rowIndex).getSexo() != null ? listaU.get(rowIndex).getSexo() : "Não informado";
                 default -> "-";
             };
         }

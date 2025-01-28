@@ -38,9 +38,9 @@ public class TelaPrincipal extends JFrame {
 
         JMenu opcoesU = new JMenu("Opções Usuário");
         JMenuItem buscarUsuario = new JMenuItem("Buscar Usuário");
-        JMenuItem removerUsuario = new JMenuItem("Remover Usuário");
+//        JMenuItem removerUsuario = new JMenuItem("Remover Usuário");
         opcoesU.add(buscarUsuario);
-        opcoesU.add(removerUsuario);
+//        opcoesU.add(removerUsuario);
 
         barraMenu.add(cadastro);
         barraMenu.add(opcoes);
@@ -61,11 +61,6 @@ public class TelaPrincipal extends JFrame {
         buscarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { new buscarUsuario();
-            }
-        });
-        removerUsuario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { new removerUsuario();
             }
         });
     }
