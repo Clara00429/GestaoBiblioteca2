@@ -50,13 +50,14 @@ public class Usuario extends JFrame{
                 usuario.setSexo(sexo);
 
                 try {
-                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso: " + usuarioC.salvar(usuario));
+                    String mensagem = usuarioC.salvar(usuario);
+                    JOptionPane.showMessageDialog(null, mensagem);
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao salvar o usuário: " + ex.getMessage());
                 }
             }
         });
-        Remover.addActionListener(new ActionListener() {
+     /*   Remover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -74,7 +75,7 @@ public class Usuario extends JFrame{
                     JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
                 }
             }
-        });
+        });*/
     }
     private void createUIComponents(){
 

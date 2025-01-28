@@ -10,8 +10,8 @@ import java.util.List;
 
 public class BuscarUsuario extends JFrame {
     private JTextField pesquisar;
-    private JButton buscarButton;
     private JTable tabela;
+    private JButton buscarButton;
     private JButton removerbutton;
 
     public List<UsuarioModel> buscarTodos() {
