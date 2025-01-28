@@ -1,11 +1,13 @@
 package repository;
 
+import model.LivroModel;
 import model.UsuarioModel;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioRepository {
@@ -35,26 +37,29 @@ public class UsuarioRepository {
         return instance;
     }
 
-    public String salvar(UsuarioModel usuario) throws SQLException {
+    public String Salvar(UsuarioModel usuario) throws SQLException
+    {
+
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
 
-            return "Usuario salvo com sucesso!";
+            return "Usuário salvo com sucesso!";
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    public static UsuarioModel buscarUsuario(Long id) throws SQLException {
-        UsuarioModel usuario = new UsuarioModel();
+    public static List<UsuarioModel>buscarUsuario(Long idUsuario) {
+
         try {
-            usuario = entityManager.find(UsuarioModel.class, id);
-        } catch (Exception e) {
+            List<UsuarioModel> usuarios = entityManager.createQuery("from UsuarioModel ,UsuarioModel.class").getResultList();
+            return usuarios;
+        }catch (Exception e){
             e.printStackTrace();
+            return new ArrayList<>();
         }
-        return usuario;
     }
 
     public String removerUsuario(UsuarioModel usuario)throws SQLException {

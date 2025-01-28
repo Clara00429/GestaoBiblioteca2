@@ -1,5 +1,6 @@
 package controller;
 
+import model.LivroModel;
 import model.UsuarioModel;
 import repository.UsuarioRepository;
 import view.TelaPrincipal;
@@ -16,17 +17,17 @@ public class UsuarioController {
         TelaPrincipal usuarioM = new TelaPrincipal();
         usuarioM.criarMenu();
     }*/
-    public String salvar(UsuarioModel usuario) throws SQLException {
-        String retornoRepositoryUsuario = usuarioR.salvar(usuario);
-        return retornoRepositoryUsuario;
-    }
+ public String Salvar(UsuarioModel usuario) throws SQLException
+ {
+     return usuarioR.Salvar(usuario);
+ }
 
     public List<UsuarioModel> buscarUsuario () throws SQLException {
         return UsuarioRepository.buscarUsuario();
     }
-    public static String removerUsuario(Long idUsuario) throws SQLException {
-        UsuarioModel usuario = UsuarioRepository.buscarUsuario(idUsuario);
-        return UsuarioRepository.getInstance().removerUsuario(usuario);
-    }
+   public static String removerUsuario(Long idUsuario) throws SQLException {
+       UsuarioModel usuario = UsuarioRepository.buscarUsuario(idUsuario);
+       return UsuarioRepository.getInstance().removerUsuario(usuario);
+   }
 
 }

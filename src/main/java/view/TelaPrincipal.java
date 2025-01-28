@@ -14,21 +14,22 @@ public class TelaPrincipal extends JFrame {
         criarMenu();
         this.setTitle("Gestão Biblioteca");
         this.setContentPane(principal);
+        this.setLocationRelativeTo(null);
         this.setSize(640, 480);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
     }
 
-    public void criarMenu(){
+    public void criarMenu() {
         this.setJMenuBar(barraMenu);
-        JMenu cadastro =new JMenu("Cadastrar");
+        JMenu cadastro = new JMenu("Cadastrar");
         JMenuItem cadUsuario = new JMenuItem("Cadastrar Usuário");
         JMenuItem cadLivro = new JMenuItem("Cadastrar Livro");
         cadastro.add(cadUsuario);
         cadastro.add(cadLivro);
 
-        JMenu opcoes =new JMenu("Opções Livro");
+        JMenu opcoes = new JMenu("Opções Livro");
         JMenuItem emp = new JMenuItem("Fazer Empréstimo");
         JMenuItem devolucao = new JMenuItem("Fazer Devolução");
         JMenuItem listar = new JMenuItem("Listar Livros");
@@ -38,9 +39,9 @@ public class TelaPrincipal extends JFrame {
 
         JMenu opcoesU = new JMenu("Opções Usuário");
         JMenuItem buscarUsuario = new JMenuItem("Buscar Usuário");
-        JMenuItem removerUsuario = new JMenuItem("Remover Usuário");
+//        JMenuItem removerUsuario = new JMenuItem("Remover Usuário");
         opcoesU.add(buscarUsuario);
-        opcoesU.add(removerUsuario);
+//        opcoesU.add(removerUsuario);
 
         barraMenu.add(cadastro);
         barraMenu.add(opcoes);
@@ -58,15 +59,16 @@ public class TelaPrincipal extends JFrame {
                 new Livro();
             }
         });
+
         buscarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BuscarUsuario();
+                new buscarUsuario();
             }
+
         });
     }
-    private void createUIComponents() {
+    private void createUIComponents(){
 
     }
-
 }

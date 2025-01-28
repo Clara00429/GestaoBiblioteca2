@@ -1,14 +1,14 @@
 package view;
 
+import controller.LivroController;
 import model.LivroModel;
 
 import javax.swing.*;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 public class Livro extends JFrame {
     private JPanel cadastroLivro;
@@ -19,7 +19,8 @@ public class Livro extends JFrame {
     private JTextField quantidade;
     private JTextField tema;
     private JButton ENVIAR;
-    private JFormattedTextField formattedData;
+    private JFormattedTextField formattedTextFieldData;
+    private LivroController livroController = new LivroController();
 
     public Livro() {
         this.setTitle("Cadastro de Livro");
@@ -27,6 +28,20 @@ public class Livro extends JFrame {
         this.setSize(640, 480);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
+
+        try {
+            MaskFormatter datatipo = null;
+
+            datatipo = new MaskFormatter("##/##/####");
+
+            datatipo.setPlaceholderCharacter('_');
+
+            formattedTextFieldData.setFormatterFactory(new DefaultFormatterFactory(datatipo));
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Data inválida! Use o formato dd/MM/yyyy.");
+            return;
+        }
 
         ENVIAR.addActionListener(new ActionListener() {
             @Override
@@ -37,27 +52,18 @@ public class Livro extends JFrame {
                 livro.setIsbn(Integer.parseInt(isbn.getText()));
                 livro.setQuantidade(Integer.parseInt(quantidade.getText()));
                 livro.setTema(tema.getText());
+                livro.setDataPublicacao(formattedTextFieldData.getText());
+                try{
+                    JOptionPane.showMessageDialog(null, livroController.Salvar(livro));
 
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate data = LocalDate.parse(formattedData.getText(), formatter);
-                    livro.setDataPublicacao(data);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Data inválida! Use o formato dd/MM/yyyy.");
-                    return;
+                }catch (Exception ex)
+                {
+                  throw new RuntimeException(ex);
                 }
+
             }
 
         });
     }
-    private void createUIComponents(){
-        try {
-            MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
-            maskFormatter.setPlaceholderCharacter('_');
-            formattedData = new JFormattedTextField(maskFormatter);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-    }
 }
