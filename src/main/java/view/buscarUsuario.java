@@ -20,19 +20,15 @@ public class buscarUsuario extends JFrame {
     private JButton removerbutton;
     private JPanel painel;
 
-public List<UsuarioModel> buscarUsuario() {
-      this.setTitle("Buscar Usuários");
-      UsuarioTabela usuarioTabela = new UsuarioTabela();
-      tabela.setModel(usuarioTabela);
-      tabela.setAutoCreateRowSorter(true);
-      this.setContentPane(painel);
-      this.setSize(640, 480);
-      this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-      this.setVisible(true);
-
-
-
-
+//public List<UsuarioModel> buscarUsuario() {
+//      this.setTitle("Buscar Usuários");
+//      UsuarioTabela usuarioTabela = new UsuarioTabela();
+//      tabela.setModel(usuarioTabela);
+//      tabela.setAutoCreateRowSorter(true);
+//      this.setContentPane(painel);
+//      this.setSize(640, 480);
+//      this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//      this.setVisible(true);
 
     public List<UsuarioModel> buscarUsuario() {
         try {
@@ -83,46 +79,46 @@ public List<UsuarioModel> buscarUsuario() {
         }
 
     }
-     buscarButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            int linhaSelecionada = tabela.getSelectedRow();
-            if(linhaSelecionada != -1) {
-                Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
-                try {
-                    JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
-                    buscarUsuario buscarU = new buscarUsuario();
-                    tabela.setModel((TableModel) buscarU);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
-            }
-        }
-    });
-
-    removerbutton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            int linhaSelecionada = tabela.getSelectedRow();
-            if(linhaSelecionada != -1) {
-                Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
-                try {
-                    JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
-                    buscarUsuario buscarU = new buscarUsuario();
-                    tabela.setModel((TableModel) buscarU);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao remover usuário: " + ex.getMessage());
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
-            }
-        }
-    });
-    }
+//     buscarButton.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//
+//            int linhaSelecionada = tabela.getSelectedRow();
+//            if(linhaSelecionada != -1) {
+//                Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
+//                try {
+//                    JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
+//                    buscarUsuario buscarU = new buscarUsuario();
+//                    tabela.setModel((TableModel) buscarU);
+//                } catch (SQLException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
+//            }
+//        }
+//    });
+//
+//    removerbutton.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//
+//            int linhaSelecionada = tabela.getSelectedRow();
+//            if(linhaSelecionada != -1) {
+//                Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
+//                try {
+//                    JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
+//                    buscarUsuario buscarU = new buscarUsuario();
+//                    tabela.setModel((TableModel) buscarU);
+//                } catch (SQLException ex) {
+//                    JOptionPane.showMessageDialog(null, "Erro ao remover usuário: " + ex.getMessage());
+//                }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
+//            }
+//        }
+//    });
+//    }
 }
 
 

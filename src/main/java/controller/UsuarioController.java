@@ -25,9 +25,9 @@ public class UsuarioController {
     public List<UsuarioModel> buscarUsuario () throws SQLException {
         return UsuarioRepository.buscarUsuario();
     }
-   public static String removerUsuario(Long idUsuario) throws SQLException {
-       UsuarioModel usuario = UsuarioRepository.buscarUsuario(idUsuario);
-       return UsuarioRepository.getInstance().removerUsuario(usuario);
-   }
+//   public static String removerUsuario(Long idUsuario) throws SQLException {
+//      // UsuarioModel usuario = UsuarioRepository.buscarUsuario(idUsuario);
+//       return UsuarioRepository.getInstance().removerUsuario(usuario);
+//   }
 
 }
