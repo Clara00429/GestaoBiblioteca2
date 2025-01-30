@@ -9,13 +9,6 @@ import java.util.List;
 public class LivroController {
     LivroRepository livroR = new LivroRepository();
 
-    /* public void iniciaApLivro(){
-        LivroModel livroM = new LivroModel();
-
-        TelaPrincipal livro = new TelaPrincipal();
-        livro.criarMenu();
-    }*/
-
     public String Salvar(LivroModel livro) throws SQLException
     {
         return livroR.Salvar(livro);

@@ -45,7 +45,7 @@ public class Usuario extends JFrame{
                 String sexo = "masculino";
                 if (femininoRadioButton.isSelected()){
                     sexo = "feminino";
-            }
+                }
                 UsuarioModel usuario = new UsuarioModel();
                 usuario.setNome(nome.getText());
                 usuario.setEmail(email.getText());
