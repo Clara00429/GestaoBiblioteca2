@@ -44,6 +44,17 @@ public class LivroRepository {
             return e.getMessage();
         }
     }
+    public String remover(LivroModel livro) throws SQLException {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(livro);
+            entityManager.getTransaction().commit();
+            return "Livro removido com sucesso!";
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+            return "Erro ao remover o livro" + e.getMessage();
+        }
+    }
     public List<LivroModel> listarTodos() {
         try {
             List<LivroModel> livros = entityManager.createQuery("from LivroModel ").getResultList();
@@ -52,5 +63,15 @@ public class LivroRepository {
             return new ArrayList<>();
         }
     }
+    public LivroModel buscarPorId(Long id) {
+        LivroModel livro = new LivroModel();
+        try {
+            livro = entityManager.find(LivroModel.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return livro;
+    }
+
 
 }

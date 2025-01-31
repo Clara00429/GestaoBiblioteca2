@@ -4,10 +4,10 @@ import controller.UsuarioController;
 import model.UsuarioModel;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class Usuario extends JFrame{
     private JTable tabela;
@@ -21,9 +21,9 @@ public class Usuario extends JFrame{
     private JButton Remover;
     private JPanel cadastro;
     private JLabel nomeLabel;
-    private JTextField email;
     private JFormattedTextField celular;
     private JButton buscarButton;
+    private JTextField email;
     private UsuarioController usuarioC = new UsuarioController();
 
 
@@ -38,6 +38,19 @@ public class Usuario extends JFrame{
         ButtonGroup sexoGroup = new ButtonGroup();
         sexoGroup.add(femininoRadioButton);
         sexoGroup.add(masculinoRadioButton);
+
+        try{
+            MaskFormatter mask = null;
+
+            mask = new MaskFormatter("(##) #####-####");
+
+            mask.setPlaceholderCharacter('_');
+
+            celular.setFormatterFactory(new DefaultFormatterFactory(mask));
+        }catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Formato inválido! Use o formato (##) ####-####.");
+            return; 
+        }
 
         ENVIAR.addActionListener(new ActionListener() {
             @Override
