@@ -37,7 +37,7 @@ public class UsuarioModel
     public long getIdUsuario() {
         return idUsuario;
     }
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(long idUsuario) {
         this.idUsuario = idUsuario;
     }
 

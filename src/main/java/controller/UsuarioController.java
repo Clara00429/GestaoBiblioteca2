@@ -2,31 +2,26 @@ package controller;
 
 import model.UsuarioModel;
 import repository.UsuarioRepository;
-import view.TelaPrincipal;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class UsuarioController {
-    UsuarioRepository usuarioR = new UsuarioRepository();
+    private UsuarioRepository usuarioR = new UsuarioRepository();
 
-    public void iniciaApUsuario(){
-        UsuarioModel usuario = new UsuarioModel();
-
-        TelaPrincipal usuarioM = new TelaPrincipal();
-        usuarioM.criarMenu();
-    }
-    public String salvar(UsuarioModel usuario) throws SQLException {
-        String retornoRepositoryUsuario = usuarioR.salvar(usuario);
-        return retornoRepositoryUsuario;
+    public String Salvar(UsuarioModel usuario) throws SQLException {
+        return usuarioR.salvarUsuario(usuario);
     }
 
-    public List<UsuarioModel> buscarUsuario () throws SQLException {
-        return UsuarioRepository.buscarUsuario();
-    }
-    public static String removerUsuario(Long idUsuario) throws SQLException {
-        UsuarioModel usuario = UsuarioRepository.buscarUsuario(idUsuario);
-        return UsuarioRepository.getInstance().removerUsuario(usuario);
+    public List<UsuarioModel> buscarUsuarios() throws SQLException {
+        return usuarioR.buscarTodosUsuarios();
     }
 
+    public UsuarioModel buscarUsuarioPorId(Long idUsuario) throws SQLException {
+        return usuarioR.buscarUsuario(idUsuario);
+    }
+
+    public String removerUsuario(Long idUsuario) throws SQLException {
+        return usuarioR.removerUsuario(idUsuario);
+    }
 }

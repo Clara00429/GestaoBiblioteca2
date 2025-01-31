@@ -1,79 +1,104 @@
 package view;
 
+import controller.UsuarioController;
 import model.UsuarioModel;
-import repository.UsuarioRepository;
-import javax.persistence.EntityManager;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BuscarUsuario extends JFrame {
     private JTextField pesquisar;
     private JButton buscarButton;
     private JTable tabela;
-    private JButton removerbutton;
-
-    public List<UsuarioModel> buscarTodos() {
-        try {
-            EntityManager entityManager = null;
-            List<UsuarioModel> usuario = entityManager.createQuery("from UsuarioModel").getResultList();
-            return usuario;
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
-    }
+    private JButton removerButton;
+    private JPanel painel;
+    private UsuarioController usuarioController;
 
     public BuscarUsuario() {
         this.setTitle("Buscar Usuários");
-        UsuarioTabela usuarioTabela = new UsuarioTabela();
-        tabela.setModel(usuarioTabela);
-        tabela.setAutoCreateRowSorter(true);
-        this.setContentPane(pesquisar);
-        this.setSize(640, 480);
+        this.setSize(840, 480);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        usuarioController = new UsuarioController();
+
+        painel = new JPanel();
+        tabela = new JTable(new UsuarioTabela());
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        painel.add(scrollPane);
+
+        this.setContentPane(painel);
+
+        buscarButton = new JButton("Buscar");
+        removerButton = new JButton("Remover");
+
+        painel.add(buscarButton);
+        painel.add(removerButton);
+
+        buscarButton.addActionListener(e -> atualizarTabela());
+        removerButton.addActionListener(e -> removerUsuarioSelecionado());
+
         this.setVisible(true);
     }
 
-    private class UsuarioTabela extends AbstractTableModel{
-        private UsuarioRepository usuarioRepository = new UsuarioRepository();
-        private final String[] COLUMNS = new String[] {"Id", "Nome", "E-mail", "Celular", "Sexo"};
-        private List<UsuarioModel> listaU = UsuarioRepository.buscarUsuario();
+    private void atualizarTabela() {
+        tabela.setModel(new UsuarioTabela());
+    }
+
+    private void removerUsuarioSelecionado() {
+        int linhaSelecionada = tabela.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            Long idUsuario = (Long) tabela.getValueAt(linhaSelecionada, 0);
+            try {
+                String mensagem = usuarioController.removerUsuario(idUsuario);
+                JOptionPane.showMessageDialog(null, mensagem);
+                atualizarTabela();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao remover usuário: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário para remover.");
+        }
+    }
+
+    private class UsuarioTabela extends AbstractTableModel {
+        private final String[] colunas = {"Id", "Nome", "E-mail", "Celular", "Sexo"};
+        private List<UsuarioModel> usuarios;
+
+        public UsuarioTabela() {
+            try {
+                usuarios = usuarioController.buscarUsuarios();
+            } catch (Exception e) {
+                usuarios = List.of();
+            }
+        }
 
         @Override
         public int getRowCount() {
-            return listaU.size();
+            return usuarios.size();
         }
 
         @Override
         public int getColumnCount() {
-            return COLUMNS.length;
+            return colunas.length;
         }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            return colunas[columnIndex];
+        }
+
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            return switch (columnIndex){
-                case 0 -> listaU.get(rowIndex).getIdUsuario();
-                case 1 -> listaU.get(rowIndex).getNome();
-                case 2 -> listaU.get(rowIndex).getEmail();
-                case 3 -> listaU.get(rowIndex).getNum_celular();
-                //fazer dps
-                case 4 -> listaU.get(rowIndex).getSexo();
+            UsuarioModel usuario = usuarios.get(rowIndex);
+            return switch (columnIndex) {
+                case 0 -> usuario.getIdUsuario();
+                case 1 -> usuario.getNome();
+                case 2 -> usuario.getEmail();
+                case 3 -> usuario.getNum_celular();
+                case 4 -> usuario.getSexo() != null ? usuario.getSexo() : "Não informado";
                 default -> "-";
             };
         }
-        @Override
-        public String getColumnName(int columnIndex){
-            return COLUMNS[columnIndex];
-        }
-        @Override
-        public Class<?> getColumnClass(int columnIndex) {
-            if(getValueAt(0,columnIndex) != null){
-                return getValueAt(0, columnIndex).getClass();
-            }else {
-                return Object.class;
-            }
-        }
     }
 }
-
-

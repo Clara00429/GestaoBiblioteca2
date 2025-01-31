@@ -12,15 +12,18 @@ import java.sql.SQLException;
 public class Usuario extends JFrame{
     private JTable tabela;
     private JLabel titulo;
-    private JLabel nome;
-    private JLabel email;
-    private JLabel id;
-    private JLabel celular;
+    private JTextField nome;
+    private JLabel emailLabel;
+    private JLabel celularLabel;
     private JRadioButton femininoRadioButton;
     private JRadioButton masculinoRadioButton;
     private JButton ENVIAR;
     private JButton Remover;
     private JPanel cadastro;
+    private JLabel nomeLabel;
+    private JTextField email;
+    private JFormattedTextField celular;
+    private JButton buscarButton;
     private UsuarioController usuarioC = new UsuarioController();
 
 
@@ -42,39 +45,25 @@ public class Usuario extends JFrame{
                 String sexo = "masculino";
                 if (femininoRadioButton.isSelected()){
                     sexo = "feminino";
-            }
+                }
                 UsuarioModel usuario = new UsuarioModel();
                 usuario.setNome(nome.getText());
                 usuario.setEmail(email.getText());
                 usuario.setNum_celular(celular.getText());
                 usuario.setSexo(sexo);
 
-                try {
-                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso: " + usuarioC.salvar(usuario));
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao salvar o usuário: " + ex.getMessage());
-                }
-            }
-        });
-        Remover.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                try{
+                    JOptionPane.showMessageDialog(null, usuarioC.Salvar(usuario));
 
-                int linhaSelecionada = tabela.getSelectedRow();
-                if(linhaSelecionada != -1) {
-                    Long idDoUsuarioSelecionada = Long.parseLong(tabela.getValueAt(linhaSelecionada,0).toString());
-                    try {
-                        JOptionPane.showMessageDialog(null, UsuarioController.removerUsuario(idDoUsuarioSelecionada));
-                        BuscarUsuario buscarU = new BuscarUsuario();
-                        tabela.setModel((TableModel) buscarU);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Selecione o registro que deseja remover");
+                }catch (Exception ex)
+                {
+                    throw new RuntimeException(ex);
                 }
             }
         });
+
+
+
     }
     private void createUIComponents(){
 
