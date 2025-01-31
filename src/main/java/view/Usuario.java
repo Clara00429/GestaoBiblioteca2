@@ -22,7 +22,7 @@ public class Usuario extends JFrame{
     private JPanel cadastro;
     private JLabel nomeLabel;
     private JTextField email;
-    private JTextField celular;
+    private JFormattedTextField celular;
     private JButton buscarButton;
     private UsuarioController usuarioC = new UsuarioController();
 

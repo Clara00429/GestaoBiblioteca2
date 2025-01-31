@@ -17,7 +17,7 @@ public class BuscarUsuario extends JFrame {
 
     public BuscarUsuario() {
         this.setTitle("Buscar Usuários");
-        this.setSize(840, 480);//aumentei um pouco o tamanho para o botao nao ficar fora da tela
+        this.setSize(840, 480);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         usuarioController = new UsuarioController();
@@ -69,7 +69,7 @@ public class BuscarUsuario extends JFrame {
             try {
                 usuarios = usuarioController.buscarUsuarios();
             } catch (Exception e) {
-                usuarios = List.of(); // lista vazia em caso de rro
+                usuarios = List.of();
             }
         }
 

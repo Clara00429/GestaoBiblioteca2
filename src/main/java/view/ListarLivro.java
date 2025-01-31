@@ -33,7 +33,6 @@ public class ListarLivro extends JFrame {
         this.setVisible(true);
     }
 
-    // Modelo de tabela personalizado
     class LivroTableModel extends AbstractTableModel {
         private final List<LivroModel> livros;
         private final String[] colunas = {"ID", "Título", "Autor", "Ano"};
