@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class BuscarUsuario extends JFrame {
@@ -16,6 +17,7 @@ public class BuscarUsuario extends JFrame {
     private JButton removerButton;
     private JPanel painel;
     private JButton botaoVoltar;
+    private JButton botaoEditar;
     private UsuarioController usuarioController;
 
     public BuscarUsuario() {
@@ -38,6 +40,7 @@ public class BuscarUsuario extends JFrame {
         painel.add(buscarButton);
         painel.add(removerButton);
         painel.add(botaoVoltar);
+        painel.add(botaoEditar);
 
         buscarButton.addActionListener(e -> atualizarTabela());
         removerButton.addActionListener(e -> removerUsuarioSelecionado());
@@ -49,6 +52,13 @@ public class BuscarUsuario extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
+        });
+
+        botaoEditar.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+
+           }
         });
     }
 
