@@ -17,6 +17,10 @@ public class LivroController {
         LivroModel livro = livroR.buscarPorId(idLivro);
         return livroR.remover(livro);
     }
+    public String editar(Long idLivro) throws  SQLException {
+        LivroModel livro = livroR.buscarPorId(idLivro);
+        return livroR.editar(livro);
+    }
     public List<LivroModel> listarTodos() throws SQLException {
         return livroR.listarTodos();
     }
