@@ -5,6 +5,8 @@ import model.UsuarioModel;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class BuscarUsuario extends JFrame {
@@ -13,6 +15,7 @@ public class BuscarUsuario extends JFrame {
     private JTable tabela;
     private JButton removerButton;
     private JPanel painel;
+    private JButton botaoVoltar;
     private UsuarioController usuarioController;
 
     public BuscarUsuario() {
@@ -34,11 +37,19 @@ public class BuscarUsuario extends JFrame {
 
         painel.add(buscarButton);
         painel.add(removerButton);
+        painel.add(botaoVoltar);
 
         buscarButton.addActionListener(e -> atualizarTabela());
         removerButton.addActionListener(e -> removerUsuarioSelecionado());
 
         this.setVisible(true);
+
+        botaoVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     private void atualizarTabela() {
@@ -66,7 +77,7 @@ public class BuscarUsuario extends JFrame {
         private List<UsuarioModel> usuarios;
 
         public UsuarioTabela() {
-            try {
+            try { 
                 usuarios = usuarioController.buscarUsuarios();
             } catch (Exception e) {
                 usuarios = List.of();

@@ -22,8 +22,8 @@ public class Usuario extends JFrame{
     private JPanel cadastro;
     private JLabel nomeLabel;
     private JFormattedTextField celular;
-    private JButton buscarButton;
     private JTextField email;
+    private JButton botaoVoltar;
     private UsuarioController usuarioC = new UsuarioController();
 
 
@@ -72,6 +72,13 @@ public class Usuario extends JFrame{
                 {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+
+        botaoVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
 

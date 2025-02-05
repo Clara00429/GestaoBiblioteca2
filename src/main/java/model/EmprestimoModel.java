@@ -11,8 +11,11 @@ import java.util.Date;
 public class EmprestimoModel {
     @Id
     @GeneratedValue
+    private int idEmprestimo;
     private Date dataInicio; // data_emp
-    private Date dataFim; //data_dev
+    private Date dataFim;//data_dev
+    private int idUsuario;
+
     /*
     usuario
     data_prevista
