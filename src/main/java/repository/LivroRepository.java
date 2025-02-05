@@ -55,6 +55,17 @@ public class LivroRepository {
             return "Erro ao remover o livro" + e.getMessage();
         }
     }
+    public String editar(LivroModel livro) throws SQLException{
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(livro);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Editado!";
+    }
+
     public List<LivroModel> listarTodos() {
         try {
             List<LivroModel> livros = entityManager.createQuery("from LivroModel ").getResultList();

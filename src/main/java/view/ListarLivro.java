@@ -6,6 +6,7 @@ import repository.LivroRepository;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ListarLivro extends JFrame {
     private JButton remover;
     private JButton buscar;
     private JTextField pesquisar;
+    private JButton editar;
     private JScrollPane scrollLista;
     private LivroTableModel tableModel;
     private LivroController livroControle = new LivroController();
@@ -32,15 +34,26 @@ public class ListarLivro extends JFrame {
         this.setSize(640, 480);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
+
         remover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remover();
             }
         });
+        editar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               editar();
+            }
+        });
     }
     private void AtualizarTabela(){
         //tableListaLivro.setModel(new LivroTableModel());
+    }
+     private void buscar() {
+        ListarLivro buscarLivro = new ListarLivro();
+        tableListaLivro.setModel((TableModel) buscar);
     }
 
     private  void remover() {
@@ -58,6 +71,35 @@ public class ListarLivro extends JFrame {
             JOptionPane.showMessageDialog(null, "Selecione um livro para remover.");
         }
     }
+     private void editar() {
+        int linhaSelecionada = tableListaLivro.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            Long idDoLivroSelecionado = Long.parseLong(tableListaLivro.getValueAt(linhaSelecionada, 0).toString());
+            LivroModel livro = LivroRepository.getInstance().buscarPorId(idDoLivroSelecionado);
+            if (livro != null) {
+                String novoTitulo = JOptionPane.showInputDialog("Novo título", livro.getTitulo());
+                String novoAutor = JOptionPane.showInputDialog("Novo autor", livro.getAutor());
+                String novoQuant = JOptionPane.showInputDialog("Nova quantidade", livro.getQuantidade());
+                String novoISBN = JOptionPane.showInputDialog("Novo ISBN", livro.getIsbn());
+                String novoTema = JOptionPane.showInputDialog("Novo tema", livro.getTema());
+                String novoData = JOptionPane.showInputDialog("Nova data publicação", livro.getDataPublicacao());
+                if (novoTitulo != null && !novoTitulo.isEmpty()) {
+                    livro.setTitulo(novoTitulo);
+                    try {
+                        String resultado = LivroRepository.getInstance().editar(livro);
+                        JOptionPane.showMessageDialog(null, resultado);
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Erro ao editar usuário: " + ex.getMessage());
+                    }
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione o usuário que deseja editar");
+        }
+
+    };
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

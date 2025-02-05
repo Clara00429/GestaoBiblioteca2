@@ -22,8 +22,69 @@ public class Livro extends JFrame {
     private JTextField tema;
     private JButton ENVIAR;
     private JFormattedTextField formattedTextFieldData;
+    private JTextField id;
     private LivroController livroController = new LivroController();
 
+    public Livro(long idLivro) {
+        this.setTitle("Editar Livro");
+        this.setContentPane(cadastroLivro);
+        this.setSize(640, 480);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
+
+        try {
+            MaskFormatter datatipo = null;
+
+            datatipo = new MaskFormatter("##/##/####");
+
+            datatipo.setPlaceholderCharacter('_');
+
+            formattedTextFieldData.setFormatterFactory(new DefaultFormatterFactory(datatipo));
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Data inválida! Use o formato dd/MM/yyyy.");
+            return;
+        }
+
+        LivroModel livroModel = new LivroModel();
+
+     /*   titulo.setText(livroModel.getTitulo());
+        autor.setText(livroModel.getAutor());
+        isbn.setText(Integer.parseInt(livroModel.getIsbn()));
+        quantidade.setText(livroModel.getQuantidade());
+        tema.setText(livroModel.getTema());
+        id.setText(livroModel.getIdLivro());
+        formattedTextFieldData.setFormatterFactory(livroModel.getDataPublicacao());*/
+
+        ENVIAR.setText("Atualizar");
+
+        ENVIAR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                LivroModel livro = new LivroModel();
+                livro.setTitulo(titulo.getText());
+                livro.setAutor(autor.getText());
+                livro.setIsbn(Integer.parseInt(isbn.getText()));
+                livro.setQuantidade(Integer.parseInt(quantidade.getText()));
+                livro.setTema(tema.getText());
+                try {
+                    livro.setDataPublicacao(sdf.parse(formattedTextFieldData.getText()));
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Data inválida! Use o formato dd/MM/yyyy.");
+                    throw new RuntimeException(ex);
+                }
+                try{
+                    JOptionPane.showMessageDialog(null, livroController.Salvar(livro));
+
+                }catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+        });
+    }
     public Livro() {
         this.setTitle("Cadastro de Livro");
         this.setContentPane(cadastroLivro);
@@ -64,11 +125,9 @@ public class Livro extends JFrame {
                 try{
                     JOptionPane.showMessageDialog(null, livroController.Salvar(livro));
 
-                }catch (Exception ex)
-                {
+                }catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-
             }
 
         });
