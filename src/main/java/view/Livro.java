@@ -48,13 +48,13 @@ public class Livro extends JFrame {
 
         LivroModel livroModel = new LivroModel();
 
-        titulo.setText(livroModel.getTitulo());
+     /*   titulo.setText(livroModel.getTitulo());
         autor.setText(livroModel.getAutor());
         isbn.setText(Integer.parseInt(livroModel.getIsbn()));
         quantidade.setText(livroModel.getQuantidade());
         tema.setText(livroModel.getTema());
         id.setText(livroModel.getIdLivro());
-        formattedTextFieldData.setFormatterFactory(livroModel.getDataPublicacao());
+        formattedTextFieldData.setFormatterFactory(livroModel.getDataPublicacao());*/
 
         ENVIAR.setText("Atualizar");
 
