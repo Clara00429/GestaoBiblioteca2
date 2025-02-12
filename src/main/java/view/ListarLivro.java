@@ -1,80 +1,132 @@
 package view;
 
-import repository.LivroRepository;
+import controller.LivroController;
+import model.LivroModel;
 
 import javax.swing.*;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class ListarLivro extends JFrame implements TableModel {
-    private LivroRepository livroRepository = new LivroRepository();
-    private JTable tableListaLivro;
+public class ListarLivro extends JFrame {
+    private JTextField pesquisar;
+    private JButton buscarButton;
+    private JButton remover;
+    private JTable tabela;
     private JPanel painel;
-    private JScrollPane scrollLista;
+    private LivroController livroController;
+    private LivroTableModel tableModel;
 
     public ListarLivro() {
-        this.setTitle("Lista de Livro");
-
-        painel = new JPanel();
-
-        tableListaLivro = new JTable();
-        scrollLista = new JScrollPane(tableListaLivro);
-        painel.add(scrollLista);
-
-        ListarLivro listaLivro = new ListarLivro();
-        tableListaLivro.setModel(listaLivro);
-        tableListaLivro.setAutoCreateRowSorter(true);
-
-        this.setContentPane(painel);
+        this.setTitle("Lista de Livros");
         this.setSize(640, 480);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        livroController = new LivroController();
+        painel = new JPanel(new BorderLayout());
+
+        // painel de busca
+        JPanel painelBusca = new JPanel();
+        pesquisar = new JTextField(20);
+        buscarButton = new JButton("Buscar");
+        remover = new JButton("Remover");
+        painelBusca.add(new JLabel("Título:"));
+        painelBusca.add(pesquisar);
+        painelBusca.add(buscarButton);
+        painelBusca.add(remover);
+        painel.add(painelBusca, BorderLayout.NORTH);
+
+        // tabela
+        tableModel = new LivroTableModel();
+        tabela = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        painel.add(scrollPane, BorderLayout.CENTER);
+
+        this.setContentPane(painel);
+
+        // evento para buscar
+        buscarButton.addActionListener(e -> atualizarTabela());
+
         this.setVisible(true);
-
-
     }
 
-    @Override
-    public int getRowCount() {
-        return 0;
+    private void atualizarTabela() {
+        String tituloPesquisa = pesquisar.getText().trim();
+        tableModel.filtrarLivros(tituloPesquisa);
     }
 
-    @Override
-    public int getColumnCount() {
-        return 0;
-    }
+    /*private void removerLivroSelec() {
+        int linhaSelecionada = tabela.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            Long idLivro = (Long) tabela.getValueAt(linhaSelecionada, 0);
+            try {
+                String mensagem = livroController.removerLivro(idLivro);
+                JOptionPane.showMessageDialog(null, mensagem);
+                atualizarTabela();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao remover livro: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um livro para remover.");
+        }
+    }*/
 
-    @Override
-    public String getColumnName(int columnIndex) {
-        return "";
-    }
+    // modelo da tabela livro completo
+    class LivroTableModel extends AbstractTableModel {
+        private final String[] colunas = {"ID", "Título", "Autor", "Ano", "Quantidade", "Tema", "ISBN"};
+        private List<LivroModel> livros;
+        private List<LivroModel> livrosFiltrados;
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return null;
-    }
+        public LivroTableModel() {
+            try {
+                livros = livroController.listarTodos();
+                livrosFiltrados = livros;
+            } catch (Exception e) {
+                livros = List.of();
+                livrosFiltrados = livros;
+            }
+        }
 
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
-    }
+        public void filtrarLivros(String titulo) {
+            if (titulo.isEmpty()) {
+                livrosFiltrados = livros;
+            } else {
+                livrosFiltrados = livros.stream()
+                        .filter(l -> l.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+                        .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
+        }
 
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return null;
-    }
+        @Override
+        public int getRowCount() {
+            return livrosFiltrados.size();
+        }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        @Override
+        public int getColumnCount() {
+            return colunas.length;
+        }
 
-    }
+        @Override
+        public String getColumnName(int columnIndex) {
+            return colunas[columnIndex];
+        }
 
-    @Override
-    public void addTableModelListener(TableModelListener l) {
-
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l) {
-
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            LivroModel livro = livrosFiltrados.get(rowIndex);
+            return switch (columnIndex) {
+                case 0 -> livro.getIdLivro();
+                case 1 -> livro.getTitulo();
+                case 2 -> livro.getAutor();
+                case 3 -> livro.getDataPublicacao();
+                case 4 -> livro.getQuantidade();
+                case 5 -> livro.getTema();
+                case 6 -> livro.getIsbn();
+                default -> "-";
+            };
+        }
     }
 }

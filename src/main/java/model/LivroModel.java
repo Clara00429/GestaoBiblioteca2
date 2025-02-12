@@ -3,8 +3,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name="livro")
@@ -21,10 +19,6 @@ public class LivroModel {
 
     public long getIdLivro() {
         return idLivro;
-    }
-
-    public void setIdLivro(long idLivro) {
-        this.idLivro = idLivro;
     }
 
     public String getTitulo() {

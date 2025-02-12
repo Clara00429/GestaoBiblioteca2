@@ -37,9 +37,6 @@ public class UsuarioModel
     public long getIdUsuario() {
         return idUsuario;
     }
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public String getEmail() {
         return email;
